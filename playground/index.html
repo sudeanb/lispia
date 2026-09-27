@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lispia — a tiny Lisp with macros and TCO, in your browser</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #2b3444;
+    --text: #dbe4f0; --muted: #7d8899; --accent: #d2a8ff; --ok: #56d364; --err: #f2705e;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 12px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 12px; }
+  header h1 { font-size: 19px; color: var(--accent); }
+  header span { color: var(--muted); font-size: 13px; }
+  header a { color: var(--muted); font-size: 13px; margin-left: auto; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 20px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+  textarea { width: 100%; height: 340px; background: #0a0e15; color: var(--text); border: 1px solid var(--border);
+             border-radius: 6px; padding: 10px; font: 13px/1.55 ui-monospace, Menlo, monospace; resize: vertical; outline: none; }
+  .bar { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+  button { background: var(--accent); border: 0; border-radius: 6px; color: #170a20; padding: 6px 14px; font-weight: 600; cursor: pointer; font-size: 13px; }
+  button:hover { filter: brightness(1.12); }
+  #out { height: 340px; overflow: auto; font: 13px/1.55 ui-monospace, Menlo, monospace; white-space: pre-wrap; }
+  #out .val { color: var(--ok); }
+  #out .err { color: var(--err); }
+  footer { padding: 8px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>λ Lispia</h1>
+  <span>tail-call optimized, hygienic-macro Lisp — stdlib written in itself, running entirely in your browser</span>
+  <a href="https://github.com/sudeanb/lispia">GitHub ↗</a>
+</header>
+<div class="layout">
+  <div class="card">
+    <h2>Program</h2>
+    <textarea id="src" spellcheck="false"></textarea>
+    <div class="bar">
+      <button id="run">▶ Run (Ctrl+Enter)</button>
+      <button id="clear" class="ghost">Clear output</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Output</h2>
+    <div id="out"></div>
+  </div>
+</div>
+<footer>TCO: tail positions run in constant JS stack (million-deep loops work). Macros are hygienic: template bindings are renamed with fresh gensyms and cannot capture your variables. The stdlib (map/filter/reduce) is written in Lispia itself.</footer>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

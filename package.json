@@ -1,0 +1,11 @@
+{
+  "name": "lispia",
+  "version": "0.1.0",
+  "description": "Lispia: a tiny Lisp with tail-call optimization, hygienic defmacro (quasiquote + gensym renaming), closures and a self-hosting stdlib. Zero dependencies.",
+  "type": "module",
+  "bin": { "lispia": "bin/lispia.js" },
+  "scripts": { "test": "node --test", "repl": "node bin/lispia.js" },
+  "engines": { "node": ">=18" },
+  "keywords": ["lisp", "scheme", "interpreter", "macros", "tail-call-optimization", "tco", "quasiquote", "hygiene"],
+  "license": "MIT"
+}
